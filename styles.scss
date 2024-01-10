@@ -1,0 +1,111 @@
+// Variables for colors and dimensions
+$light-grey: lightgrey;
+$yellow: #D8DA3D;
+$purple: #80007E;
+$orange: #FF7F00;
+$blue: #0000FF;
+$black: black;
+$border-width: thin;
+$border-radius: 5px;
+$margin-right: 300px;
+$padding: 25px 5px;
+
+// Mixin for dashed borders
+@mixin dashed-border($color) {
+    border-style: dashed;
+    border-width: $border-width;
+    border-color: $color;
+    margin-right: $margin-right;
+    padding: $padding;
+}
+
+%outliners {
+    padding-bottom: 20px;
+  }
+
+  %dashed-border {
+    @extend %outliners !optional;
+  }
+
+  
+// Nested style for cleaner structure
+body {
+    font-family: Arial, sans-serif;
+    color: $purple;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    background-color: $yellow;
+
+    .container {
+        display: flex;
+        flex-direction: row;
+
+        .flex-left {
+            width: 20%;
+            padding: 50px 0 100px 20px;
+            height: 50%;
+
+            .left-div1, .left-div2 {
+                background-color: $light-grey;
+                width: 250px;
+                margin: 10px 0;
+                padding: 20px 0 30px 20px;
+                height: 0;
+                text-align: left;
+
+                &.left-div1 {
+                    background: linear-gradient(to right, white 90%, $orange 10%);
+                }
+
+                &.left-div2 {
+                    background: linear-gradient(to right, white 90%, $blue 10%);
+                }
+            }
+        }
+
+        .flex-right {
+            width: 100%;
+            padding: 0;
+
+            .dashed-line {
+                border-bottom: 1px dashed black;
+                margin: 150px 0 10px 0;
+            }
+
+            p.ex1 {
+                @include dashed-border(black);
+                text-align-last: left;
+            }
+
+            p.ex2 {
+                @include dashed-border(red);
+                text-align-last: right;
+            }
+
+            p.ex3 {
+                border-style: dotted;
+                border-width: thin;
+                border-color: #0000FF;
+                margin-right: 300px;
+                padding: 25px 5px;
+                text-align-last: center;
+            }
+        }
+    }
+}
+
+// Animation effect on hover
+.left-div1:hover, .left-div2:hover {
+    animation: bounce 0.5s ease infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
